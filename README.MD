@@ -1,7 +1,9 @@
 # Build Druid Docker
 
-To build Docker Image: `docker build -t chethanuk/druid .` 
-    or `docker build -t username/druid .` 
+To build Docker Image: 
+`docker build -t chethanuk/druid .` 
+or 
+`docker build -t username/druid .` 
 
 ![Note] Dont forget to update the docker-compose with appropriate tag
 
@@ -11,6 +13,7 @@ To push to docker hub: `docker push chethanuk/druid`
 # Run
 
 To bring postgres, zookeeper, overlord, coordinator, middlemanager, historical, broker up.
+
 Run this: `docker-compose up -d`
 
 Available environment options:

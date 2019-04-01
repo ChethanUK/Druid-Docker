@@ -1,15 +1,17 @@
 # Build Druid Docker
-`docker build -t chethanuk/druid .`
 
-`docker push chethanuk/druid`
+To build Docker Image: `docker build -t chethanuk/druid .` 
+    or `docker build -t username/druid .` 
+
+![Note] Dont forget to update the docker-compose with appropriate tag
+
+To push to docker hub: `docker push chethanuk/druid`
+                or `docker build -t username/druid .`
 
 # Run
 
-`docker-compose -f docker-compose.test.yml up -d`
-
-`docker-compose -f docker-compose.test.yml down`
-
-`docker-compose up -d`
+To bring postgres, zookeeper, overlord, coordinator, middlemanager, historical, broker up.
+Run this: `docker-compose up -d`
 
 Available environment options:
 
@@ -20,3 +22,9 @@ Available environment options:
 - `DRUID_HOSTNAME` '-'
 - `DRUID_PORT` '-'
 - `DRUID_ZK_HOST` '-'
+
+Tests:
+
+`docker-compose -f docker-compose.test.yml up -d`
+
+`docker-compose -f docker-compose.test.yml down`

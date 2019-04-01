@@ -1,0 +1,92 @@
+version: "2"
+services:
+
+  postgres:
+    image: postgres:9.6-alpine
+    container_name: postgres
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./conf/postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+
+  zookeeper:
+    container_name: zookeeper
+    image: znly/zookeeper:3.4.8
+    environment:
+      - ZOO_ID=1
+      - ZOO_SERVERS=zookeeper
+
+  overlord:
+    container_name: overlord
+    image: chethanuk/druid
+    ports:
+      - 8090:8090
+    command:
+      - overlord
+
+  coordinator:
+    container_name: coordinator
+    image: chethanuk/druid
+    ports:
+      - 8081:8081
+    command:
+      - coordinator
+
+  middlemanager:
+    container_name: middlemanager
+    image: chethanuk/druid
+    ports:
+      - 8091:8091
+    command:
+      - middleManager
+
+  historical:
+    container_name: historical
+    image: chethanuk/druid
+    ports:
+      - 8093:8093
+    command:
+      - historical
+
+  broker:
+    container_name: broker
+    image: chethanuk/druid
+    ports:
+      - 8082:8082
+    command:
+      - broker
+
+  # tranquility:
+  #   container_name: tranquility
+  #   image: chethanuk/druid
+  #   ports:
+  #     - 8200:8200
+
+  # superset:
+  #   container_name: superset
+  #   image: amancevice/superset
+  #   ports:
+  #     - 8088:8088
+  #   volumes:
+  #     - ./.superset:/home/superset/.superset
+
+  # presto-coordinator:
+  #   image: shawnzhu/prestodb:0.181
+  #   ports:
+  #     - "8080:8080"
+
+  # metabase:
+  #   container_name: metabase
+  #   image: metabase/metabase
+  #   ports:
+  #     - 3000:3000
+  #   environment:
+  #     MB_DB_TYPE: postgres
+  #     MB_DB_DBNAME: metabase
+  #     MB_DB_PORT: 5432
+  #     MB_DB_USER: metabase
+  #     MB_DB_PASS: metabase
+  #     MB_DB_HOST: postgres
+  #   volumes:
+  #     - ./.metabase-data:/metabase-data
+
